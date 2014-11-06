@@ -669,6 +669,7 @@ fixie.paint! # => :green
 
 * [Traits: A Mechanism for Fine-grained Reuse (PDF)](http://scg.unibe.ch/archive/papers/Duca06bTOPLASTraits.pdf)
 * [github.com/joecorcoran/fabrik](https://github.com/joecorcoran/fabrik)
+* [github.com/joecorcoran/talks/tree/master/traits](https://github.com/joecorcoran/talks/tree/master/traits)
 
 * [corcoran.io](http://corcoran.io)
 * [@josephcorcoran](http://twitter.com/josephcorcoran)
