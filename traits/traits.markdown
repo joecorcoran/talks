@@ -116,7 +116,7 @@ class Fixie
 end
 ```
 
-^ Here's the same code written with composition instead of single inheritance. This feels better. Bikes are essentially made up of components and we are reflecting that. We're no longer bound to the hierarchy that single inheritance forced on us.
+^ Here's the same code written in a composed instead of single inheritance. This feels better. Bikes are essentially made up of components and we are reflecting that. We're no longer bound to the hierarchy that single inheritance forced on us.
 
 ---
 
@@ -144,7 +144,7 @@ fixie = Fixie.new
 fixie.brakes # => ?
 ```
 
-^ Let's change things slightly. What if we had this setup? Let's assume that most bikes have two brakes, so it's safe to define the `#brakes` method like this in our Bike module. Both modules now both provide a #brakes method.
+^ Let's change things slightly. What if we had this setup? Let's assume that most bikes have two brakes, so it's safe to define the `#brakes` method like this in our Bike module. Both modules now both provide a `#brakes` method.
 
 ---
 
@@ -189,7 +189,7 @@ Fixie.ancestors
 # Problems
 * Implied design
 
-^ There is application logic buried in those implications, rather than clearly stated.
+^ There is application logic buried in implied behaviour, rather than clearly stated.
 
 ---
 
@@ -197,7 +197,7 @@ Fixie.ancestors
 * Implied design
 * Maintenance is harder
 
-^ Developers who are new to the project might miss our intentions completely and break things. We might even forget our intentions and break things ourselves.
+^ Developers who are new to the project might miss our intentions completely and break things. We might even forget our own intentions and break things ourselves at some time in the future.
 
 ---
 
@@ -212,11 +212,13 @@ Fixie.ancestors
 
 # [fit] The diamond problem
 
-^ If you dig into this topic, you'll come across the Diamond Problem. It's very similar to what we just worked through.
+^ If you dig into this topic, you'll come across the famous Diamond Problem. It's very similar to what we just worked through.
 
 ---
 
 ![](diamond.png)
+
+^ This is more of a concrete problem in languages where memory allocation and actually copying class members are concerns. But it's still a higher level code clarity problem in Ruby.
 
 ---
 
@@ -280,7 +282,7 @@ $$
 \{a \to m1, b \to m2\} + \{a \to m1, b \to m3\} = \{a \to m1, b \to \top\}
 $$
 
-^ Here is a demonstration of composing two method dictionaries and getting a method conflict. Notice that in both sets, `a` refers to the same method body, so no problem there. But `b` refers to two different method bodies, so we cannot resolve the union of these two sets. The `T` symbol there usually means "top", but in this paper it's just used to refer to any method conflict. The reason I included the last three slides is not to intimidate people with maths, but to demonstrate that the mathematical notation in this paper is straightforward. If you understood this, you can jump in and read the rest of the paper without any problems. Go for it!
+^ Here is a demonstration of composing two method dictionaries and getting a method conflict. Notice that in both sets, `a` refers to the same method body `m1`, so there's no conflict. But `b` refers to two different method bodies, `m2` and `m3`, so we cannot resolve the union of these two sets. The `T` symbol there usually means "top", but in this paper it's just used to refer to any method conflict. The reason I included the last three slides is not to intimidate people with maths, but to demonstrate that the mathematical notation in this paper is straightforward. If you understood this, you can jump in and read the rest of the paper without any problems. Go for it!
 
 ---
 
@@ -509,6 +511,33 @@ end
 ---
 
 ```ruby
+class Fixie
+  extend Fabrik::Composer
+
+  compose Bike,
+          Track[aliases: { brakes: :stopping_machines }]
+end
+```
+
+^ Here's what aliasing a method looks like.
+
+---
+
+```ruby
+class Fixie
+  extend Fabrik::Composer
+
+  def brakes; [:front] end
+
+  compose Bike, Track
+end
+```
+
+^ Methods that are defined before composition take precedence over any methods provided by traits. This feels a bit rough, but Ruby is so permitting that I didn't feel like fighting it. :)
+
+---
+
+```ruby
 class Bike
   extend Fabrik::Trait
 
@@ -551,6 +580,20 @@ Qux.new.quux
 ```
 
 ^ We can then pass that unbound method to `define_method`, defining it on another class! This is basically how Fabrik works.
+
+---
+
+```ruby
+module Foo
+  def bar; :baz end
+end
+
+bar = Foo.instance_method(:bar)
+
+class Qux; end
+Qux.send(:define_method, :quux, bar)
+# => TypeError: bind argument must be a subclass of Foo
+```
 
 ---
 
@@ -618,14 +661,14 @@ fixie = Fixie.new
 fixie.paint! # => :green
 ```
 
-^ So let's forget about all the wheels, gears and brakes and look at a different example. Because the `#paint!` method provided by both traits is *the same*, we can compose without conflicts!
+^ So let's look at a different example. Because the `#paint!` method provided by both traits is *the same*, we can compose without conflicts!
 
 ---
 
 # Links
 
 * [Traits: A Mechanism for Fine-grained Reuse (PDF)](http://scg.unibe.ch/archive/papers/Duca06bTOPLASTraits.pdf)
-* [Fabrik](https://github.com/joecorcoran/fabrik)
+* [github.com/joecorcoran/fabrik](https://github.com/joecorcoran/fabrik)
 
 * [corcoran.io](http://corcoran.io)
 * [@josephcorcoran](http://twitter.com/josephcorcoran)
