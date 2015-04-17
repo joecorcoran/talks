@@ -220,7 +220,7 @@ end
 ```ruby
 require 'rack/test'
 
-config.before(type: :rack) do |example|
+config.before(type: :rack) do
   described_class.append_view_path('app/views')
 end
 
