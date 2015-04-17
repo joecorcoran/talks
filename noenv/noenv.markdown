@@ -133,15 +133,21 @@ end
 # Controller
 
 ```ruby
+class ApplicationController < ActionController::Base
+  def unauthorized
+    head :unauthorized
+  end
+end
+
 class UsersController < ApplicationController
+  before_action :unauthorized, only: :new
+
   def index
     @users = User.all
     @widgets = Widget.all
   end
 
-  def new
-    head :unauthorized
-  end
+  def new; end
 end
 ```
 
@@ -179,8 +185,6 @@ require 'spec_helper'
 require_relative '../../app/controllers/users_controller'
 
 RSpec.describe UsersController, type: :rack do
-  include Rack::Test::Methods
-
   describe 'GET index' do
     let(:app) { UsersController.action(:index) }
 
@@ -214,10 +218,13 @@ end
 # Extra setup
 
 ```ruby
+require 'rack/test'
+
 config.before(type: :rack) do |example|
-  require 'rack/test'
   described_class.append_view_path('app/views')
 end
+
+config.include(Rack::Test::Methods, type: :rack)
 ```
 
 ---
