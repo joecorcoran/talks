@@ -1,6 +1,8 @@
 # [fit] Testing Rails
 # [fit] Without the Rails environment
 
+## [fit] Joe Corcoran · [corcoran.io](http://corcoran.io) · [@josephcorcoran](http://twitter.com/josephcorcoran)
+
 ---
 
 # [fit] Why?
