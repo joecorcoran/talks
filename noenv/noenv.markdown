@@ -314,3 +314,13 @@ Dir['app/models/**/*.rb'].each do |p|
   require_relative(File.join('../../..', p))
 end
 ```
+
+---
+
+# Thanks!
+
+This talk
+[github.com/joecorcoran/talks/tree/master/noenv](https://github.com/joecorcoran/talks/tree/master/noenv)
+
+Sample Rails application
+[github.com/joecorcoran/noenv](https://github.com/joecorcoran/noenv)
