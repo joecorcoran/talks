@@ -14,6 +14,8 @@
 
 # Vagrant
 
+## Adding a base box
+
 ```ruby
 Vagrant.configure(2) do |config|
   config.vm.box = 'ubuntu/trusty64'
@@ -23,6 +25,8 @@ end
 ---
 
 # Vagrant
+
+## Provisioning
 
 ```ruby
 Vagrant.configure(2) do |config|
@@ -36,6 +40,8 @@ end
 ---
 
 # Vagrant
+
+## Provisioning
 
 ```ruby
 Vagrant.configure(2) do |config|
@@ -51,6 +57,8 @@ end
 
 # Vagrant
 
+## Commands
+
 ```
 $ vagrant up
 ```
@@ -58,6 +66,8 @@ $ vagrant up
 ---
 
 # Vagrant
+
+## Commands
 
 ```
 $ vagrant halt
@@ -81,13 +91,15 @@ $ vagrant provision --provision-with hello
 
 ---
 
-# Base box
+# Betamax base box
 
 [github.com/tape-tv/betamax-box](https://github.com/tape-tv/betamax-box)
 
 ---
 
-# Base box
+# Betamax base box
+
+## Contents
 
 * `build-essential`
 * Git
@@ -99,7 +111,17 @@ $ vagrant provision --provision-with hello
 
 ---
 
-# Base box
+# Betamax base box
+
+## Development
+
+[github.com/tape-tv/betamax-box](https://github.com/tape-tv/betamax-box)
+
+---
+
+# Betamax base box
+
+## Development
 
 [github.com/tape-tv/betamax-box](https://github.com/tape-tv/betamax-box) -> boxes.tape.tv
 
@@ -107,7 +129,7 @@ $ vagrant provision --provision-with hello
 
 # Betamax
 
-Using the base box
+## Using the base box
 
 ```ruby
 Vagrant.configure(2) do |config|
@@ -163,6 +185,8 @@ end
 
 # Betamax
 
+## Boot
+
 ```
 $ vagrant ssh
 ```
@@ -171,37 +195,7 @@ $ vagrant ssh
 
 # Betamax
 
-```
-$ vagrant ssh
-```
-
-```
-$ cd /betamax
-```
-
----
-
-# Betamax
-
-```
-$ vagrant ssh
-```
-
-```
-$ cd /betamax
-```
-
-```
-$ source setup.sh
-```
-
----
-
-# Betamax
-
-```
-$ vagrant ssh
-```
+## Setup
 
 ```
 $ cd /betamax
