@@ -217,8 +217,6 @@ $ ./database.sh
 
 ---
 
-# Thanks
+# Thanks!
 
 More info at [betamax/vagrant.md](https://github.com/tape-tv/betamax/blob/master/vagrant.md)
-
----
