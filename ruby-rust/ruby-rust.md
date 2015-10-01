@@ -46,7 +46,7 @@ module Something
 end
 ```
 
-^ Been around since 2002. Used internally for a long time. Useful but limited in scope, required the user to be happy at a low level. Bad UX, perceived as buggy, eprecated, disappeared as of Ruby 2.2.
+^ Been around since 2002. Useful but limited, required the user to be happy at a low level. Bad UX, perceived as buggy, deprecated, disappeared as of Ruby 2.2.
 
 ---
 
@@ -69,7 +69,7 @@ module Something
 end
 ```
 
-^ FFI provided the same basics as DL but added extra funtionality; cross-platform support and cross-Ruby support (MRI, JRuby, Rubinius). Made it easier to work with structs, arrays etc.
+^ FFI provided the same basics as DL but added extra funtionality; cross-platform support and cross-Ruby support (MRI, JRuby, Rubinius). Made it easier to work with structs, arrays etc. Notice the function signature is expressed as Ruby symbols instead of C-like strings. Nicer!
 
 ---
 
@@ -283,7 +283,7 @@ head = Fiddle::Function.new(
 )
 ```
 
-^ Function def.
+^ Using the same library handle as before, we create a function object to represent our Rust function. This time the function accepts a pointer and returns an integer.
 
 ---
 
@@ -299,7 +299,7 @@ packed.members = array.pack('l*')
 head.call(packed)   #=> 3
 ```
 
-^ Packs the Ruby array into memory.
+^ Here we use the struct, take note of the array length, and pack the array members into memory. The pack method in Ruby packs an array into a string, according to some magical formatting string which specifies the number of bytes per character, and some other details. l* just happens to be the setting we need to pack our array of ints into memory in a way that Rust expects. And when we call head... success!
 
 ---
 
@@ -310,4 +310,4 @@ head.call(packed)   #=> 3
 * [github.com/steveklabnik/rust_example](https://github.com/steveklabnik/rust_example)
 * [rust-lang.org](https://www.rust-lang.org/)
 
-^ Mention C bridges into Rubygems, extconf.rb
+^ Mention C bridges in Rubygems, extconf.rb
