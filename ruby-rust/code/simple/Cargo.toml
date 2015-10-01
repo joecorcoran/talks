@@ -1,0 +1,10 @@
+[package]
+name = "simple"
+version = "0.1.0"
+authors = ["Joe Corcoran <joecorcoran@gmail.com>"]
+
+[lib]
+crate_type = ["dylib"]
+
+[dependencies]
+libc = "0.1.10"
