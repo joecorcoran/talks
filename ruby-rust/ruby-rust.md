@@ -92,7 +92,7 @@ pointer.read_array_of_int(2)
 module Something
   extend Fiddle::Importer
   dlload './something.so'
-	extern 'int foo(int)'
+  extern 'int foo(int)'
 end
 ```
 
